@@ -1,0 +1,5 @@
+<linker>
+  <assembly fullname="Assembly-CSharp">
+    <type fullname="Game.Core.SaveLoad.SaveData" preserve="all" />
+  </assembly>
+</linker>
