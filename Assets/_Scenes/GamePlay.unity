@@ -3418,6 +3418,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  _gameplayConfig: {fileID: 11400000, guid: 8797d26ca878e4d8db113c5256abbbd9, type: 2}
   _gameSettingsConfig: {fileID: 11400000, guid: 4b0dd45b368ce4e1488195817660f674, type: 2}
   _levelListConfig: {fileID: 11400000, guid: e1fd5bcf32b064f5eb3deeaedb5d1387, type: 2}
 --- !u!1001 &387216372
