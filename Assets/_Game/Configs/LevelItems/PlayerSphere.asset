@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c36fce39309547e5b12f5de4ed5dd6e, type: 3}
+  m_Name: PlayerSphere
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Configs.ItemSettingsConfig
+  _uniqueKey: PlayerSphere
+  Name: Player Sphere
+  Description: 
+  Icon: {fileID: 0}
+  Rarity: 1
+  Tag: 1
+  Type: 0
+  Prefab: {fileID: 1580625648221127334, guid: a6815538a2210489d8fbef9fc4d5913f, type: 3}
+  DisplayParameters: 
+  Parameters:
+    _serializedList: []

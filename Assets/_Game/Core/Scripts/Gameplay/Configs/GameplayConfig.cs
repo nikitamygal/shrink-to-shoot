@@ -1,3 +1,5 @@
+using AYellowpaper.SerializedCollections;
+using Game.Core.Loadouts;
 using UnityEngine;
 
 namespace Game.Configs
@@ -8,5 +10,8 @@ namespace Game.Configs
         [Header("Delays")]
         public float WinDelay = 2.5f;
         public float LoseDelay = 2.0f;
+
+        [Header("Default Loadout")]
+        public SerializedDictionary<LoadoutSlotType, ItemSettingsConfig> DefaultLoadout = new();
     }
 }

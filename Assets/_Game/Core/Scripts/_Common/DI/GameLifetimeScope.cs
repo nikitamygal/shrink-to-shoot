@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Game.Biomes;
 using Game.Configs;
 using Game.Core.Input;
+using Game.Core.Loadouts;
 using Game.Core.SaveLoad;
 using Game.Gameplay;
 using Game.Levels;
@@ -55,6 +56,7 @@ namespace Game.Scopes
             builder.Register<PopupWindowService>(Lifetime.Singleton).As<IPopupWindowService>();
             builder.Register<SceneInjector>(Lifetime.Singleton).As<IInitializable>().As<IStartable>();
             builder.Register<GameplayService>(Lifetime.Singleton).As<IGameplayService>().As<IInitializable>().As<IStartable>().As<IDisposable>();
+            builder.Register<LoadoutService>(Lifetime.Singleton).As<ILoadoutService>();
             builder.Register<LevelService>(Lifetime.Singleton).As<ILevelService>();
             builder.Register<GUIService>(Lifetime.Singleton).As<IGUIService>().As<IStartable>();
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
