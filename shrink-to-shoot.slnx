@@ -9,4 +9,6 @@
   <Project Path="Lofelt.NiceVibrations.Editor.csproj" />
   <Project Path="AYellowpaper.SerializedCollections.Editor.csproj" />
   <Project Path="Lofelt.NiceVibrations.csproj" />
+  <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
 </Solution>
