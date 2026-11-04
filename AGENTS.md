@@ -1,41 +1,26 @@
-# Shrink to Shoot — Codex project instructions
+# Shrink to Shoot — Codex instructions
 
-## Mission
-Build a small, polished Android hypercasual Unity prototype. Implement the supplied test assignment faithfully; do not invent a bigger game.
-Read `docs/ai/PROJECT_CONTEXT.md` before gameplay changes and `docs/ai/WORKFLOW.md` before multi-agent work.
+## Project
+- Unity 6.6, URP, Android. Hypercasual prototype: a sphere spends its size to charge shots, clears obstacles and jumps toward the goal.
+- Existing stack: C#, VContainer, UniTask, DOTween, More Mountains Feel, Cinemachine, New Input System, UIParticle (`com.coffee.ui-particle`). Use only packages actually installed.
 
-## Technology
-- Unity 6.6 (verify exact Editor and URP package versions from `ProjectSettings/ProjectVersion.txt` and `Packages/manifest.json`).
-- C#, URP, DOTween, More Mountains Feel, VContainer, UniTask, `com.coffee.ui-particle`.
-- Use the versions and APIs actually installed. Do not install packages or change manifests without approval.
+## Code and architecture
+- Before editing, inspect the **relevant existing** code and imitate its style, namespaces, layout and APIs. Do not impose a new architecture.
+- Match established C# conventions: `PascalCase` types/methods/properties, `_camelCase` private fields, explicit `[SerializeField]` for Inspector fields, and existing brace/spacing style.
+- Keep changes focused. Extend existing components/services instead of creating duplicate managers, wrappers or speculative abstractions.
+- Use VContainer for scene-level/service dependencies. A reusable player prefab must not serialize references to scene-only objects such as `LevelPath`; resolve them from the level scope/composition root.
+- Prefab-local component and asset references may use `[SerializeField]` and/or `GetComponent` as appropriate. `FindAnyObjectByType`, `GameObject.Find` and similar scene searches are not substitutes for proper DI.
+- Keep input devices in the input layer, mass logic separate from movement/shooting, and gameplay values in the existing `GameplayConfig`.
 
-## Working agreements
-- Inspect actual files, types, package manifests, and scene assets before assuming APIs or folder layout.
-- Prefer the project's existing naming/namespace/assembly conventions. Do not create speculative abstractions or a new architecture without a concrete need.
-- One owner per modified file. Parallel agents may explore/review different areas, but must not write the same files, scene, prefab, or project settings simultaneously.
-- For multi-file gameplay features: ask `gameplay` for implementation, `architecture` for DI/API review, `qa` for validation; delegate only independent tasks.
-- Use `visuals` for URP/material/Feel work and `unity_editor` for scene/prefab work. Editor and visuals agents must coordinate before changing the same asset.
-- Never claim Unity compilation, playmode tests, screenshots, Android builds, or profiler results were verified unless tools actually produced evidence.
-- Never rewrite or regenerate Unity `.meta` files or GUIDs; keep YAML scene/prefab edits minimal. Prefer Unity Editor / verified Unity MCP / an Editor script for structured asset mutations.
-- Do not run Unity batchmode on the same project while its Editor instance is open; coordinate editor access.
-- Avoid destructive actions, package upgrades, mass asset conversion, `git reset --hard`, force pushes, or overwriting user work without explicit approval.
-- Keep runtime code independent of `UnityEditor`; editor tooling belongs under `Editor` folders or editor-only assemblies.
-- Favor clear ownership, testability, cancellation/lifetime handling for UniTask, proper tween cleanup, and explicit VContainer registrations.
-- For new performance-sensitive code avoid per-frame allocations, accidental LINQ in hot paths, and unnecessary scene searches.
+## Unity scenes, prefabs and assets
+- Inspect **and directly edit** `.unity`, `.prefab`, `.asset`, materials and their serialized references when the available tools permit it. Do not require Unity MCP.
+- Wire required Inspector references and integrate changes into the actual scene/prefabs; code-only changes are not a completed gameplay feature.
+- Preserve Unity GUIDs, `.meta` files, prefab connections and overrides. Avoid unrelated changes.
+- Do not generate an Editor utility for routine asset edits. Use an Editor script only if direct editing is technically impractical or materially less safe; explain why.
+- Do not claim to have inspected a running Unity Editor unless you actually accessed it. If integration cannot be verified, identify the exact remaining checks.
 
-## Done means
-Explain what changed and why; list affected files; distinguish automated checks passed from manual checks needed in Unity/Android. Mention assumptions or blockers.
-
-## Unity Editor Integration
-
-Unity MCP is not configured.
-
-- Do not attempt to install or configure Unity MCP.
-- Do not assume direct access to the running Unity Editor.
-- Prefer Unity Editor scripts for scene, prefab, material,
-  and GameObject modifications.
-- Place Editor scripts inside an Editor folder.
-- Expose operations through MenuItem commands.
-- Make Editor operations safe to run multiple times.
-- Never overwrite existing scene objects without checking.
-- Clearly describe any manual Unity Editor steps.
+## Execution
+- Work as one agent. For clear tasks, implement directly; inspect only relevant files, avoid broad audits or lengthy plans unless requested.
+- Respect the current scope; do not refactor unrelated code, upgrade packages or change project settings unnecessarily.
+- Check compilation/errors with available tools; never claim Play Mode, Android builds, or visual validation without evidence.
+- Finish with a concise summary of modified files, what was verified, and any unavoidable manual steps.

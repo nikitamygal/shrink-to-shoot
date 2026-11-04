@@ -1,9 +1,6 @@
-# Project-scoped Codex configuration. Loaded only when this repository is trusted.
-# Model is inherited from your Codex session so the config works with the model your account exposes.
-[agents]
-enabled = true
-max_concurrent_threads_per_session = 4
+# Project-only Codex settings. Keep the model selected in VS Code.
+# No sandbox, approval, filesystem, or MCP restrictions are configured here.
+model_reasoning_effort = "medium"
 
-# Optional Unity MCP: configure in the Codex IDE extension only AFTER installing,
-# starting, and verifying a Unity-compatible MCP server. See docs/ai/UNITY_MCP.md.
-# Do not invent an MCP URL or execute unknown servers.
+[agents]
+enabled = false
