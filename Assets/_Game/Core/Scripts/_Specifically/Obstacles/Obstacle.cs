@@ -16,11 +16,12 @@ namespace Game.Core.Controllers
     {
         [SerializeField, Min(0), Tooltip("Zero uses GameplayConfig.DefaultObstacleHealth.")]
         private int _healthOverride;
-        [SerializeField] private MMF_Player _damageFeedback;
-        [SerializeField] private MMF_Player _destructionFeedback;
-        [SerializeField] private Transform _visual;
         [SerializeField, Min(.5f), Tooltip("Safety limit for feedback accidentally configured to loop forever.")]
         private float _feedbackTimeout = 10f;
+
+        [Header("Feedbacks")]
+        [SerializeField] private MMFeedbacks _damageFeedback;
+        [SerializeField] private MMFeedbacks _destructionFeedback;
 
         private Collider[] _colliders;
         private IEventBus _events;
@@ -39,53 +40,19 @@ namespace Game.Core.Controllers
         private void Awake()
         {
             _colliders = GetComponentsInChildren<Collider>(true);
-            EnsureDestructionFeedback();
-        }
-
-        private void EnsureDestructionFeedback()
-        {
-            if (_destructionFeedback != null) return;
-            if (_visual == null) _visual = transform.Find("Model");
-            if (_visual == null) return;
-
-            // Old obstacle assets have no authored Feel player. Keep the fallback inside the
-            // obstacle's lifetime and use the same Feel sequence as the Editor setup utility.
-            var feedbackObject = new GameObject("Runtime Destruction Feedback");
-            feedbackObject.transform.SetParent(transform, false);
-            _destructionFeedback = feedbackObject.AddComponent<MMF_Player>();
-            _destructionFeedback.AddFeedback(new MMF_Scale
-            {
-                Label = "Tree destruction",
-                AnimateScaleTarget = _visual,
-                AnimateScaleDuration = .35f,
-                Mode = MMF_Scale.Modes.ToDestination,
-                DestinationScale = Vector3.zero,
-                DetermineScaleOnPlay = true,
-                UniformScaling = true,
-                RemapCurveZero = 0f,
-                RemapCurveOne = 1f,
-                AnimateScaleTweenX = new MoreMountains.Tools.MMTweenType(AnimationCurve.Linear(0f, 0f, 1f, 1f), "AnimateX")
-            });
-            _destructionFeedback.Initialization();
         }
 
         public void TakeDamage(int amount)
         {
             if (IsDestroying || !isActiveAndEnabled || amount <= 0) return;
             Health = Mathf.Max(0, Health - amount);
-            if (Health > 0)
-            {
-                _damageFeedback?.PlayFeedbacks();
-                return;
-            }
+            _damageFeedback?.PlayFeedbacks();
+            if (Health > 0) return;
 
             IsDestroying = true;
             if (_colliders == null) _colliders = GetComponentsInChildren<Collider>(true);
             for (int i = 0; i < _colliders.Length; i++)
                 if (_colliders[i] != null) _colliders[i].enabled = false;
-            // Stop an in-progress damage pulse before the destruction feedback takes over its target.
-            _damageFeedback?.StopFeedbacks();
-            _destructionFeedback?.PlayFeedbacks();
             Destroyed?.Invoke(this);
             _events?.Trigger(new ObstacleDestroyed(this));
             _feedbackCancellation = CancellationTokenSource.CreateLinkedTokenSource(this.GetCancellationTokenOnDestroy());
@@ -96,6 +63,9 @@ namespace Game.Core.Controllers
         {
             try
             {
+                await UniTask.Delay(TimeSpan.FromSeconds(.5f), cancellationToken: cancellation);
+                _damageFeedback?.StopFeedbacks();
+                _destructionFeedback?.PlayFeedbacks();
                 // Let Feel's first update start, including a configured initial delay.
                 await UniTask.Yield(PlayerLoopTiming.Update, cancellation);
                 float elapsed = 0f;

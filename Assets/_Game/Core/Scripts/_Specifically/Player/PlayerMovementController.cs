@@ -13,7 +13,7 @@ namespace Game.Core.Controllers
     public class PlayerMovementController : InjectMonoBehaviour
     {
         [SerializeField] private PlayerMassController _mass;
-        [SerializeField] private MMF_Player _jumpFeedback;
+        [SerializeField] private MMFeedbacks _jumpFeedback;
 
         private LevelPath _path;
         private GameplayConfig _config;
