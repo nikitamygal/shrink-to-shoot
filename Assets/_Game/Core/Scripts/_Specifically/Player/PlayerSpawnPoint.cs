@@ -5,14 +5,16 @@ using Game.Levels;
 using Game.Tools;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace Game.Spawners
 {
-    public class PlayerSpawnPoint : InjectMonoBehaviour
+    public class PlayerSpawnPoint : InjectMonoBehaviour, IStartable
     {
         private ILevelService _levelService;
         private ILoadoutService _loadoutService;
         private IObjectResolver _resolver;
+        private bool _spawned;
 
         [Inject]
         public void Construct(ILevelService levelService, ILoadoutService loadoutService, IObjectResolver resolver)
@@ -22,8 +24,10 @@ namespace Game.Spawners
             _resolver = resolver;
         }
 
-        private void Start()
+        void IStartable.Start()
         {
+            if (_spawned || _levelService == null || _resolver == null) return;
+            _spawned = true;
             CameraTarget target = SpawnPlayer();
             _levelService?.RegisterMainTarget(target);
         }

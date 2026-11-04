@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Game.Biomes;
 using Game.Configs;
 using Game.Core.Input;
+using Game.Core.Controllers;
 using Game.Core.Loadouts;
 using Game.Core.SaveLoad;
 using Game.Gameplay;
@@ -59,7 +60,7 @@ namespace Game.Scopes
             builder.Register<LoadoutService>(Lifetime.Singleton).As<ILoadoutService>();
             builder.Register<LevelService>(Lifetime.Singleton).As<ILevelService>();
             builder.Register<GUIService>(Lifetime.Singleton).As<IGUIService>().As<IStartable>();
-            builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
+            builder.Register<InputService>(Lifetime.Singleton).As<IInputService>().As<IInitializable>().As<ITickable>().As<IDisposable>();
             builder.Register<MMSoundProvider>(Lifetime.Singleton).As<ISoundProvider>();
             builder.Register<SoundService>(Lifetime.Singleton).As<ISoundService>();
             builder.Register<SoundLoader>(Lifetime.Singleton).As<IInitializable>().As<IStartable>();
@@ -67,6 +68,7 @@ namespace Game.Scopes
             builder.RegisterComponentInHierarchy<UIRoot>();
             builder.RegisterComponentInHierarchy<PopupWindow>();
             builder.RegisterComponentInHierarchy<BiomeCreator>();
+            builder.RegisterComponentInHierarchy<LevelPath>();
         }
     }
 }

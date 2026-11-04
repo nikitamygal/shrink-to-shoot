@@ -1,6 +1,7 @@
 using Game.Events;
 using Game.Events.Gameplay;
 using Game.Tools;
+using Game.Levels;
 using Unity.Cinemachine;
 using UnityEngine;
 using VContainer;
@@ -14,17 +15,23 @@ namespace Game.CameraTools
         private CinemachineCamera _cinemachineCamera;
         private CameraTarget _target;
         private bool _subscribed;
+        private ILevelService _levelService;
 
         [Inject]
-        public void Construct(IEventBus eventBus)
+        public void Construct(IEventBus eventBus, ILevelService levelService)
         {
             _eventBus = eventBus;
+            _levelService = levelService;
+            _cinemachineCamera = GetComponent<CinemachineCamera>();
             TrySubscribe();
+            SetTarget(_levelService.MainTarget);
         }
 
         private void Awake()
         {
             _cinemachineCamera = GetComponent<CinemachineCamera>();
+            if (!TryGetComponent<CinemachineFixedHeight>(out _))
+                gameObject.AddComponent<CinemachineFixedHeight>();
         }
 
         private void Start()
@@ -34,17 +41,26 @@ namespace Game.CameraTools
 
         private void OnChangeCameraPriority(ChangeCameraPriority e)
         {
-            _cinemachineCamera.Priority = e.settings.Priority;
+            if (e.settings != null) _cinemachineCamera.Priority = e.settings.Priority;
         }
 
         private void OnSetCameraTarget(SetCameraTarget e)
         {
-            _cinemachineCamera.Follow = _target.transform;
+            SetTarget(e.target);
+        }
+
+        private void SetTarget(CameraTarget target)
+        {
+            // Keep the authored startup target until the player has actually spawned.
+            if (target == null) return;
+            _target = target;
+            if (_cinemachineCamera != null)
+                _cinemachineCamera.Follow = _target.transform;
         }
 
         private void TrySubscribe()
         {
-            if (_eventBus == null || _subscribed)
+            if (_eventBus == null || _subscribed || !isActiveAndEnabled)
                 return;
 
             _eventBus.Subscribe<ChangeCameraPriority>(OnChangeCameraPriority);
@@ -65,9 +81,15 @@ namespace Game.CameraTools
         private void OnEnable()
         {
             TrySubscribe();
+            if (_levelService != null) SetTarget(_levelService.MainTarget);
         }
 
         private void OnDisable()
+        {
+            TryUnsubscribe();
+        }
+
+        private void OnDestroy()
         {
             TryUnsubscribe();
         }

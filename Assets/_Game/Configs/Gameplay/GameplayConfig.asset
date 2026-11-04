@@ -18,3 +18,21 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value: {fileID: 11400000, guid: 9fab04842eaba4349a6cf6fab38ec3f0, type: 2}
+  JumpDistance: 2
+  JumpHeight: 0.65
+  JumpDuration: 0.5
+  JumpEase: 6
+  ObstacleDetectionDistance: 8
+  ObstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  InitialPlayerRadius: 0.75
+  MinimumPlayerRadius: 0.2
+  MinimumProjectileRadius: 0.12
+  ProjectileChargeSpeed: 0.35
+  ProjectileSpeed: 12
+  ProjectileArcHeight: 1.5
+  ProjectileLifetime: 5
+  ProjectileExplosionRadius: 0.5
+  ProjectileRadiusMultiplier: 3
+  DefaultObstacleHealth: 1

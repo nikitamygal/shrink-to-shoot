@@ -4,6 +4,5 @@ namespace Game.CameraTools
 {
     public class CameraTarget : InjectMonoBehaviour
     {
-        
     }
 }

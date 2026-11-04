@@ -259,7 +259,7 @@ MonoBehaviour:
           ButtonText: Automatic Shaker Setup
         Owner: {fileID: 8080244725124610111}
         DebugActive: 0
-        Sfx: {fileID: 8300000, guid: 97e3040e40c484140957192788aff65b, type: 3}
+        Sfx: {fileID: 8300000, guid: 1fcfd83e3d859db4585f34930d88477c, type: 3}
         RandomSfx: []
         TestPlayButton:
           ButtonText: Debug Play Sound
@@ -319,6 +319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8236670956602419847}
+  - component: {fileID: 6846829165302957557}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -335,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 5273169270710534081}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.94, y: 1.75, z: -11.66}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -343,6 +344,22 @@ Transform:
   - {fileID: 2765000857721591477}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6846829165302957557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273169270710534081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961309d1080df4fba8e6503e49d73fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Core.Controllers.Projectile
+  _visual: {fileID: 1837262173837738444}
+  _sphereCollider: {fileID: 7982838764362790760}
+  _impactFeedback: {fileID: 8080244725124610111}
+  _feedbackTimeout: 10
 --- !u!1 &6772045570894923032
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +459,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4d57c2bc78d084964acb6df02d4e83bc, type: 2}
+  - {fileID: 2100000, guid: 7917f4b5165ef4a2b9e9ee87d4da977f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

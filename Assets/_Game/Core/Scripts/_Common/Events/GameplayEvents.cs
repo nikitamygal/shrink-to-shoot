@@ -10,4 +10,6 @@ namespace Game.Events.Gameplay
 {
     public record ChangeCameraPriority(CameraSettings settings) : IGameEvent;
     public record SetCameraTarget(CameraTarget target) : IGameEvent;
+    public record GameplayEnded(Game.Gameplay.GameStates Result) : IGameEvent;
+    public record ObstacleDestroyed(Game.Core.Controllers.Obstacle Obstacle) : IGameEvent;
 }

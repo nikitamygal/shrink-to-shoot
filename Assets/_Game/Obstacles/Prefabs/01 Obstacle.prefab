@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 860658604491532077}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4107561490024265795}
-  m_Layer: 0
+  - component: {fileID: 587166521216740809}
+  - component: {fileID: 7108245645930421301}
+  m_Layer: 6
   m_Name: 01 Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,6 +66,46 @@ Transform:
   - {fileID: 860658604491532077}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7108245645930421301
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518741490917981507}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.35
+  m_Height: 4.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.25, z: 0}
+--- !u!114 &587166521216740809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518741490917981507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e869dea95c4f247ef96a2c7697565be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Core.Controllers.Obstacle
+  _healthOverride: 0
+  _damageFeedback: {fileID: 0}
+  _destructionFeedback: {fileID: 0}
+  _visual: {fileID: 860658604491532077}
+  _feedbackTimeout: 10
 --- !u!1001 &6988374891824546510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,6 +173,18 @@ PrefabInstance:
     - target: {fileID: 868859769844269485, guid: 9d9016a93e2afb14993f9ab42254fc2b, type: 3}
       propertyPath: m_Name
       value: Tree (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 868859769844269485, guid: 9d9016a93e2afb14993f9ab42254fc2b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429847533671604870, guid: 9d9016a93e2afb14993f9ab42254fc2b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5048192288109483137, guid: 9d9016a93e2afb14993f9ab42254fc2b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5875433307025127579, guid: 9d9016a93e2afb14993f9ab42254fc2b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
