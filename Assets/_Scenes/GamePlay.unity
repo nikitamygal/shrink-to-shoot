@@ -943,16 +943,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1703324a530143da8ef8c3474d028e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UIHudPanel
-  _elements:
-    _serializedList:
-    - Key: 0
-      Value: {fileID: 0}
-    - Key: 1
-      Value: {fileID: 814713534}
-    - Key: 2
-      Value: {fileID: 0}
-    - Key: 3
-      Value: {fileID: 0}
 --- !u!1 &795722793
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,6 +2126,7 @@ GameObject:
   - component: {fileID: 1323717391}
   - component: {fileID: 1323717390}
   - component: {fileID: 1323717392}
+  - component: {fileID: 1323717393}
   m_Layer: 5
   m_Name: LevelBar
   m_TagString: Untagged
@@ -2214,6 +2205,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UILevelNumber
   _textLevel: {fileID: 2128856402}
+  _fadeDuration: 1.5
+  _fadeDelay: 2
+--- !u!225 &1323717393
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323717388}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1345708511
 GameObject:
   m_ObjectHideFlags: 0
