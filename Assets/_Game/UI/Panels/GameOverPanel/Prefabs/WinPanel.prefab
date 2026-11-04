@@ -527,7 +527,7 @@ GameObject:
   - component: {fileID: 3259066221805268410}
   - component: {fileID: 5509127733128674211}
   m_Layer: 5
-  m_Name: EnableFeedbacks
+  m_Name: OnShowFeedbacks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -571,7 +571,7 @@ MonoBehaviour:
   Direction: 0
   AutoChangeDirectionOnEnd: 0
   AutoPlayOnStart: 0
-  AutoPlayOnEnable: 1
+  AutoPlayOnEnable: 0
   LogMissingTargets: 1
   ForceTimescaleMode: 0
   ForcedTimescaleMode: 1
@@ -659,6 +659,7 @@ MonoBehaviour:
   - rid: 6452490662922682475
   - rid: 6452490662922682461
   - rid: 4366722045446979584
+  - rid: 7331711859002441983
   PlayMode: 0
   SequentialDelay: 0
   KeepPlayModeChanges: 0
@@ -1008,6 +1009,83 @@ MonoBehaviour:
         TargetColor: {r: 1, g: 0, b: 0, a: 1}
         UseAlpha: 1
         DisableOnStop: 0
+    - rid: 7331711859002441983
+      type: {class: MMF_UIParticlePlay, ns: Game.UI.Feedbacks, asm: Assembly-CSharp}
+      data:
+        Active: 1
+        UniqueID: -1770532349
+        Label: UIParticle Play
+        OriginalLabel: UIParticle Play
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          IgnoreFeedbackDurationForRepeats: 0
+          PlayCount: 0
+          LimitPlayCount: 0
+          MaxPlayCount: 3
+          SetPlayCountToZeroOnReset: 0
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
+        Owner: {fileID: 5509127733128674211}
+        DebugActive: 0
+        Target: {fileID: 5175894411807315506}
+        MoveToPosition: 1
 --- !u!1 &6890632217841696555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,6 +1511,7 @@ GameObject:
   - component: {fileID: 1882719962868013848}
   - component: {fileID: 2003882019399377440}
   - component: {fileID: 2505356547382634130}
+  - component: {fileID: 5871259962705000001}
   m_Layer: 5
   m_Name: WinPanel
   m_TagString: Untagged
@@ -1514,6 +1593,31 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &5871259962705000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8423018518391900336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503cf4055b8314f4480181b5a6eac358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UIWinPanel
+  _emojiImage: {fileID: 8529876771512209171}
+  _emojiSprites:
+  - {fileID: 21300000, guid: 73acd1415c4895249972393fe067acaa, type: 3}
+  - {fileID: 21300000, guid: df5d928c9e613ec47bcfcbc69d39e02b, type: 3}
+  - {fileID: 21300000, guid: 1d1e729ac334cfe4397bd0d51bb005f1, type: 3}
+  _emojiDuration: 0.5
+  _emojiEase: 30
+  _titleImage: {fileID: 3878061135348395657}
+  _titleDuration: 0.5
+  _titleEase: 24
+  _appearDuration: 0.5
+  _onShowFeedbacks: {fileID: 5509127733128674211}
+  _nextBtn: {fileID: 5090436368643285815}
 --- !u!1001 &1422847832895945583
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using Game.Configs;
 using Game.Events;
 using Game.Events.Gameplay;
 using Game.Levels;
+using Game.UI;
 using MoreMountains.Tools;
 using UnityEngine;
 using VContainer;
@@ -22,6 +23,7 @@ namespace Game.Gameplay
 
         [Inject] private readonly ILevelService _levelService;
         [Inject] private readonly IEventBus _eventBus;
+        [Inject] private readonly IGUIService _guiService;
 
         [Inject]
         public GameplayService(GameplayConfig gameplayConfig)
@@ -55,7 +57,14 @@ namespace Game.Gameplay
                 float delay = result == GameStates.Win ? Config.WinDelay : Config.LoseDelay;
                 await UniTask.Delay(TimeSpan.FromSeconds(Mathf.Max(0f, delay)), cancellationToken: cancellation.Token);
                 if (!_disposed && GameState.CurrentState == result)
+                {
+                    if (result == GameStates.Win)
+                        _guiService.Open<UIWinPanel>();
+                    else if (result == GameStates.Lose)
+                        _guiService.Open<UILosePanel>();
+
                     _eventBus.Trigger(new GameplayEnded(result));
+                }
             }
             catch (OperationCanceledException) when (cancellation.IsCancellationRequested) { }
             finally

@@ -64,6 +64,5 @@ namespace Game.UI
         {
             AddPanels();
         }
-
     }
 }
