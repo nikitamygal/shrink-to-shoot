@@ -26,6 +26,11 @@ MonoBehaviour:
   ObstacleLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  DoorOpeningDistance: 10
+  DoorOpeningDuration: 0.7
+  DoorOpeningAngle: 90
+  ExitDuration: 1
+  ExitSpinDegrees: 720
   InitialPlayerRadius: 0.75
   MinimumPlayerRadius: 0.2
   MinimumProjectileRadius: 0.12

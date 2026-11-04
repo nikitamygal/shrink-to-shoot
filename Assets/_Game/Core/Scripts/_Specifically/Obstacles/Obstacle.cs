@@ -64,7 +64,7 @@ namespace Game.Core.Controllers
             try
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(.5f), cancellationToken: cancellation);
-                _damageFeedback?.StopFeedbacks();
+                if (_damageFeedback != null && _damageFeedback.IsPlaying) _damageFeedback.StopFeedbacks();
                 _destructionFeedback?.PlayFeedbacks();
                 // Let Feel's first update start, including a configured initial delay.
                 await UniTask.Yield(PlayerLoopTiming.Update, cancellation);
@@ -88,8 +88,8 @@ namespace Game.Core.Controllers
         private void OnDisable()
         {
             _feedbackCancellation?.Cancel();
-            _damageFeedback?.StopFeedbacks();
-            _destructionFeedback?.StopFeedbacks();
+            if (_damageFeedback != null && _damageFeedback.IsPlaying) _damageFeedback.StopFeedbacks();
+            if (_destructionFeedback != null && _destructionFeedback.IsPlaying) _destructionFeedback.StopFeedbacks();
         }
     }
 }

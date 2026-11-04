@@ -25,6 +25,13 @@ namespace Game.Configs
         [Tooltip("Only colliders on these layers block movement and receive explosion damage.")]
         public LayerMask ObstacleLayerMask;
 
+        [Header("Level Finish")]
+        [Min(0f)] public float DoorOpeningDistance = 10f;
+        [Min(0.01f)] public float DoorOpeningDuration = 0.7f;
+        public float DoorOpeningAngle = 90f;
+        [Min(0.01f)] public float ExitDuration = 1f;
+        public float ExitSpinDegrees = 720f;
+
         [Header("Player Mass (uniform density, sphere volume)")]
         [Min(0.01f)] public float InitialPlayerRadius = 0.75f;
         [Min(0.01f)] public float MinimumPlayerRadius = 0.2f;
@@ -51,6 +58,9 @@ namespace Game.Configs
             JumpHeight = Mathf.Max(0f, JumpHeight);
             JumpDuration = Mathf.Max(0.01f, JumpDuration);
             ObstacleDetectionDistance = Mathf.Max(0f, ObstacleDetectionDistance);
+            DoorOpeningDistance = Mathf.Max(0f, DoorOpeningDistance);
+            DoorOpeningDuration = Mathf.Max(0.01f, DoorOpeningDuration);
+            ExitDuration = Mathf.Max(0.01f, ExitDuration);
             InitialPlayerRadius = Mathf.Max(0.02f, InitialPlayerRadius);
             MinimumPlayerRadius = Mathf.Clamp(MinimumPlayerRadius, 0.01f, InitialPlayerRadius - 0.001f);
             MinimumProjectileRadius = Mathf.Max(0.01f, MinimumProjectileRadius);

@@ -28,6 +28,7 @@ namespace Game.Core.Controllers
         public LevelPath Path => _path;
         public bool IsJumping => _jump != null && _jump.IsActive();
         public bool IsBlocked { get; private set; }
+        public bool IsExiting { get; private set; }
         public Vector3 ForwardDirection
         {
             get
@@ -55,7 +56,7 @@ namespace Game.Core.Controllers
 
         private void Update()
         {
-            if (_config == null || _gameplay.GameState.CurrentState != GameStates.Play || IsJumping ||
+            if (IsExiting || _config == null || _gameplay.GameState.CurrentState != GameStates.Play || IsJumping ||
                 _path == null || !_path.IsValid || _mass == null) return;
 
             while (_waypoint < _path.Count && Vector3.Distance(_groundPosition, _path.GetPoint(_waypoint)) < .01f)
@@ -63,7 +64,6 @@ namespace Game.Core.Controllers
             if (_waypoint >= _path.Count)
             {
                 IsBlocked = false;
-                _gameplay.GameState.ChangeState(GameStates.Win);
                 return;
             }
 
@@ -150,11 +150,23 @@ namespace Game.Core.Controllers
             return nearest;
         }
 
+        public bool BeginExit()
+        {
+            if (IsExiting) return false;
+            IsExiting = true;
+            _jump?.Kill();
+            _jump = null;
+            _groundPosition = transform.position;
+            IsBlocked = false;
+            _jumpFeedback?.StopFeedbacks();
+            return true;
+        }
+
         private void OnDisable()
         {
             _jump?.Kill();
             _jump = null;
-            transform.position = _groundPosition;
+            if (!IsExiting) transform.position = _groundPosition;
             IsBlocked = false;
         }
     }

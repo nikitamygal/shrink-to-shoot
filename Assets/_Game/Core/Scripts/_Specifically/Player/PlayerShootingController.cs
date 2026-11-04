@@ -79,7 +79,8 @@ namespace Game.Core.Controllers
         }
 
         private bool CanPlay() => isActiveAndEnabled &&
-            _gameplay != null && _gameplay.GameState.CurrentState == GameStates.Play;
+            _gameplay != null && _gameplay.GameState.CurrentState == GameStates.Play &&
+            (_movement == null || !_movement.IsExiting);
 
         private void BeginCharge()
         {

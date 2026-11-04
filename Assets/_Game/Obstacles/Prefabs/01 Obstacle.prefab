@@ -910,9 +910,9 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 7563227496610754793}
         DebugActive: 0
-        Mode: 0
+        Mode: 2
         ObjectPoolSize: 5
-        MutualizePools: 0
+        MutualizePools: 1
         ParentTransform: {fileID: 0}
         CachedRecycle: 1
         ParticlesPrefab: {fileID: 198075596481196922, guid: dd46de4320f3d1b4087b5f9c0a24ab36, type: 3}
